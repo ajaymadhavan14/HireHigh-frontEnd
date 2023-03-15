@@ -1,3 +1,3 @@
-const baseUrl = 'https://hirehigh.online/api/';
+const baseUrl = 'http://localhost:3001';
 
 export default baseUrl;

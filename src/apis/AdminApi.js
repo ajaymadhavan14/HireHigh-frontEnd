@@ -108,3 +108,21 @@ export const AdminGetCompanys = async (token) => {
     return error;
   }
 };
+
+export const getDashboardData = async (token) => {
+  try {
+    const { data } = await axios.get('/api/admin/dashboard', { headers: { 'admin-access-token': token } });
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const AdminSideDashboardJob = async (token) => {
+  try {
+    const { data } = await axios.get('/api/admin/dashboard-job', { headers: { 'admin-access-token': token } });
+    return data;
+  } catch (error) {
+    return error;
+  }
+};

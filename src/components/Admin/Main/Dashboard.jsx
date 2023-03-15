@@ -31,6 +31,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal2 from 'sweetalert2';
 import axios from '../../../axios/axios';
 import { adminDetails } from '../../../redux/admin';
+import AdminDashboardCard from '../Dashboard/Dashboard';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -347,7 +348,7 @@ function AdminMain() {
           }}
         >
           <Toolbar />
-
+          <AdminDashboardCard />
         </Box>
       </Box>
     </ThemeProvider>
