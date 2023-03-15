@@ -1,0 +1,154 @@
+import * as React from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Container from '@mui/material/Container';
+import Moment from 'react-moment';
+import { useEffect, useState } from 'react';
+import { AdminSideJobList, JobActivated, JobBlocked } from '../../../apis/AdminApi';
+
+export default function AdminJobList() {
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.white,
+      color: theme.palette.common.black,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage);
+  // };
+
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
+
+  const [job, setJob] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  const token = localStorage.getItem('adminToken');
+
+  useEffect(() => {
+    async function invoke() {
+      await AdminSideJobList(token).then((response) => {
+        setJob(response);
+      });
+    }
+    invoke();
+  }, [refresh]);
+
+  const blocked = async (id) => {
+    await JobBlocked(id, token);
+    setRefresh(!refresh);
+  };
+
+  const actived = async (id) => {
+    await JobActivated(id, token);
+    setRefresh(!refresh);
+  };
+
+  return (
+    <Container component="main" maxWidth="xl" sx={{ marginTop: '3vh' }}>
+      <Box>
+        <TableContainer sx={{ maxHeight: 700 }} component={Paper}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="center">NO</StyledTableCell>
+                <StyledTableCell align="center">Company Name</StyledTableCell>
+                <StyledTableCell align="center">Job Title</StyledTableCell>
+                <StyledTableCell align="center">Posted On</StyledTableCell>
+                <StyledTableCell align="center">Category</StyledTableCell>
+                <StyledTableCell align="center">Salary Range</StyledTableCell>
+                <StyledTableCell align="center">Status</StyledTableCell>
+                {/* <StyledTableCell align="center">PHONE NO</StyledTableCell>
+              <StyledTableCell align="center">Website</StyledTableCell>
+              <StyledTableCell align="center">Status</StyledTableCell> */}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {job?.map((el, index) => (
+                <StyledTableRow key={el?.id}>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {index + 1}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {el?.companyName?.companyName}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {el?.jobTitle}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+
+                    <Moment format="DD/MM/YYYY" date={el?.createdAt} />
+
+                  </StyledTableCell>
+                  <StyledTableCell align="center">{el?.jobCategory.name}</StyledTableCell>
+                  <StyledTableCell align="center">{el?.salaryRange}</StyledTableCell>
+
+                  {/* <StyledTableCell align="center">{el?.phoneNumber}</StyledTableCell>
+                <StyledTableCell align="center">{el?.website}</StyledTableCell> */}
+                  <StyledTableCell align="center">
+                    {el.isActive
+                      ? (
+                        <Button
+                        // eslint-disable-next-line no-underscore-dangle
+                          onClick={() => blocked(el?._id)}
+                          sx={{
+                            backgroundColor: '#03a903', color: '#fff', fontWeight: '800', ':hover': { backgroundColor: 'blue' },
+                          }}
+                        >
+                          Active
+                        </Button>
+                      )
+                      : (
+                        <Button
+                        // eslint-disable-next-line no-underscore-dangle
+                          onClick={() => actived(el?._id)}
+                          sx={{
+                            ml: 1, backgroundColor: 'red', color: '#fff', fontWeight: '800', ':hover': { backgroundColor: 'blue' },
+                          }}
+                        >
+                          Block
+                        </Button>
+                      )}
+                  </StyledTableCell>
+
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {/* <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      /> */}
+      </Box>
+    </Container>
+  );
+}
