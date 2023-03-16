@@ -4,9 +4,10 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState, useRef } from 'react';
-import { format } from 'timeago.js';
 import InputEmoji from 'react-input-emoji';
 import { Button } from '@mui/material';
+// import { format } from 'timeago.js';
+import Moment from 'react-moment';
 import { addMessage, getMessages } from '../../../apis/ChatApi';
 import { getUser } from '../../../apis/SeekerApi';
 import './ChatBox.css';
@@ -133,8 +134,8 @@ function ChatBox({
               >
                 <span>{message.text}</span>
                 {' '}
-                {/* <span>{moment(message.createdAt).format('LT')}</span> */}
-                <span>{format(message.createdAt)}</span>
+                {/* <span>{format(message?.createdAt)}</span> */}
+                <Moment fromNow>{message?.createdAt}</Moment>
               </div>
             ))}
           </div>
