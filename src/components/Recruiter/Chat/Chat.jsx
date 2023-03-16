@@ -24,6 +24,7 @@ import {
   useContext, useState, useEffect, useRef,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import AppContext from '../../../context/AppContext';
 import './Chat.css';
@@ -32,6 +33,7 @@ import Conversation from './Conversation';
 import { userChats } from '../../../apis/ChatApi';
 
 export default function RecruiterChat() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // const socket = useRef();
   // const { user } = useSelector((state) => state.userInfo);
@@ -51,7 +53,7 @@ export default function RecruiterChat() {
         const { data } = await userChats(recruiter?.id);
         setChats(data);
       } catch (error) {
-        console.log(error);
+        navigate('/error-page');
       }
     };
     getChats();

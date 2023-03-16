@@ -114,7 +114,7 @@ export default function CompanyJobShow() {
         } else {
           dispatch(companyDetails(response.data));
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => navigate('/error-page'));
     } else {
       navigate('/company/login');
     }

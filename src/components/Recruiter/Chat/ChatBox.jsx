@@ -8,6 +8,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Moment from 'react-moment';
 import InputEmoji from 'react-input-emoji';
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { addMessage, getMessages } from '../../../apis/ChatApi';
 import { getUser } from '../../../apis/RecruiterApi';
 import './Chat.css';
@@ -15,6 +16,7 @@ import './Chat.css';
 function ChatBox({
   chat, currentUser, setSendMessage, receivedMessage,
 }) {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -31,7 +33,7 @@ function ChatBox({
         const res = await getUser(userId);
         setUserData(res);
       } catch (error) {
-        console.log(error);
+        navigate('/error-page');
       }
     };
 
@@ -45,7 +47,7 @@ function ChatBox({
         const { data } = await getMessages(chat?._id);
         setMessages(data);
       } catch (error) {
-        console.log(error);
+        navigate('/error-page');
       }
     };
 
@@ -74,7 +76,7 @@ function ChatBox({
       setMessages([...messages, data]);
       setNewMessage('');
     } catch {
-      console.log('error');
+      navigate('/error-page');
     }
   };
 

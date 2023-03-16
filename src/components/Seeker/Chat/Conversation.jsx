@@ -3,9 +3,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../../apis/SeekerApi';
 
 function Conversation({ data, currentUser, online }) {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
 
@@ -18,7 +20,7 @@ function Conversation({ data, currentUser, online }) {
         });
         dispatch({ type: 'SAVE_USER', data });
       } catch (error) {
-        console.log(error);
+        navigate('/error-page');
       }
     };
 

@@ -14,6 +14,7 @@ import AdminRouter from './routes/AdminRouter';
 import RecruiterRouter from './routes/RecruiterRouter';
 import SeekerRouter from './routes/SeekerRouter';
 import CompanyRouter from './routes/CompanyRouter';
+import ErrorPage from './components/ErrorPage/Page-404';
 
 function App() {
   const [userDetails, setUserDetails] = useState({});
@@ -54,6 +55,7 @@ function App() {
             <Route path="/admin/*" element={<AdminRouter />} />
             <Route path="/recruiter/*" element={<RecruiterRouter />} />
             <Route path="/company/*" element={<CompanyRouter />} />
+            <Route path="/error-page" element={<ErrorPage />} />
 
           </Routes>
         </BrowserRouter>

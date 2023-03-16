@@ -94,7 +94,7 @@ export default function SeekerEditprofile() {
     reader.onload = () => resolve(reader.result);
     reader.onerror = (error) => reject(error);
   }).catch((err) => {
-    console.log(err);
+    navigate('/error-page');
   });
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -183,7 +183,7 @@ export default function SeekerEditprofile() {
                           reader.onload = () => resolve(reader.result);
                           reader.onerror = (error) => reject(error);
                         }).catch((err) => {
-                          console.log(err);
+                          navigate('/error-page');
                         });
                         const imgBase = await toBase64(image);
                         await uploadString(imageRef, imgBase, 'data_url').then(async () => {

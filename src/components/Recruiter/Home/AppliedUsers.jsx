@@ -118,7 +118,7 @@ export default function RecruiterSideJobAppliedList() {
         } else {
           dispatch(recruiterDetails(response.data));
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => navigate('/error-page'));
     } else {
       navigate('/recruiter/login');
     }

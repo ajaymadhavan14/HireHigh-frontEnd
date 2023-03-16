@@ -178,7 +178,7 @@ export default function SeekerHome() {
         } else {
           dispatch(userDetails(response.data));
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => navigate('/error-page'));
     } else {
       navigate('/login');
     }
