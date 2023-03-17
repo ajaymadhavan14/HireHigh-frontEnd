@@ -148,12 +148,12 @@ function ChatBox({
               value={newMessage}
               onChange={handleChange}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === 'Enter' && !newMessage.trim() === '') {
                   handleSend();
                 }
               }}
             />
-            <Button className="send-button button" onClick={handleSend} variant="contained">Send</Button>
+            <Button className="send-button button" disabled={newMessage.trim() === ''} onClick={handleSend} variant="contained">Send</Button>
             <input
               type="file"
               name=""

@@ -24,6 +24,7 @@ function App() {
   const [companyDetails, setCompanyDetails] = useState([]);
   const [companyOtpConf, setCompanyOtpConf] = useState([]);
   const [socket, setSocket] = useState(io('https://socket.hirehigh.online'));
+  // const [socket, setSocket] = useState(io('http://localhost:8800'));
   const [sendNotification, setSendNotification] = useState(null);
   const [recieveNotification, setRecieveNotification] = useState(null);
 
