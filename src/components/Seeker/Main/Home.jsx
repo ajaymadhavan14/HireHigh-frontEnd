@@ -123,7 +123,7 @@ export default function SeekerHomeCard() {
         </Typography>
       </Box>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {data.map((el) => (
+        {data?.map((el) => (
           <Card
             sx={{
               m: 3, minWidth: 300, minHeight: 340, maxWidth: 310,
