@@ -133,7 +133,7 @@ export default function CompanyHome() {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#f04f4f',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Logout!',
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('companyToken');

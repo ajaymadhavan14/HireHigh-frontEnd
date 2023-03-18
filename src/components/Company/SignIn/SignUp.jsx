@@ -172,36 +172,44 @@ export default function SignnUPCompany() {
                       });
                     }
                   } else {
+                    setLoading(false);
                     setPassword(true);
                     setConfPassword(true);
                     setPasswordError('Password is not match');
                     setConfPasswordError('Password is not match');
                   }
                 } else {
+                  setLoading(false);
                   setPassword(true);
                   setPasswordError('Minimum 6 character');
                 }
               } else {
+                setLoading(false);
                 setPhoneNumber(true);
                 setPhoneNumberError('Please enter 10 digit');
               }
             } else {
+              setLoading(false);
               setPhoneNumber(true);
               setPhoneNumberError('Please Enter valid Phone no');
             }
           } else {
+            setLoading(false);
             setEmail(true);
             setEmailError('Please enter valid Email');
           }
         } else {
+          setLoading(false);
           setCompanyName(true);
           setCompanyNameError('Please enter valid Name');
         }
       } else {
+        setLoading(false);
         setCompanyName(true);
         setCompanyNameError('Please enter valid Name');
       }
     } else {
+      setLoading(false);
       setTotalRequired('Please enter your Details');
     }
   };
