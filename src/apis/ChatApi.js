@@ -2,7 +2,7 @@ import axios from '../axios/axios';
 
 export const createChat = async (datas) => {
   try {
-    const { data } = await axios.post('/api/chat/', datas);
+    const { data } = await axios.post('/api/chat', datas);
     return data;
   } catch (error) {
     return error;
