@@ -135,10 +135,12 @@ export default function RecruiterJobEdit() {
           navigate('/recruiter/login');
         }
       } else {
+        setLoading(false);
         setJobTitle(true);
         setJobTitleError('Please enter valid Name');
       }
     } else {
+      setLoading(false);
       setTotalRequired('Please enter your Details');
     }
   };

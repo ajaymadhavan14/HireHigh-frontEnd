@@ -140,14 +140,17 @@ export default function SeekerAddprofile() {
             navigate('/login');
           }
         } else {
+          setLoading(false);
           setPosition(true);
           setPositionError('Please enter valid Name');
         }
       } else {
+        setLoading(false);
         setHeadline(true);
         setHeadlineError('Please enter valid Name');
       }
     } else {
+      setLoading(false);
       setTotalRequired('Please enter your Details');
     }
   };

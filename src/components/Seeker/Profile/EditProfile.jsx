@@ -207,34 +207,42 @@ export default function SeekerEditprofile() {
                       navigate('/login');
                     }
                   } else {
+                    setLoading(false);
                     setPosition(true);
                     setPositionError('Please enter valid Name');
                   }
                 } else {
+                  setLoading(false);
                   setHeadline(true);
                   setHeadlineError('Please enter valid Name');
                 }
               } else {
+                setLoading(false);
                 setPhoneNumber(true);
                 setPhoneNumberError('Please enter 10 digit');
               }
             } else {
+              setLoading(false);
               setPhoneNumber(true);
               setPhoneNumberError('Please Enter valid Phone no');
             }
           } else {
+            setLoading(false);
             setEmail(true);
             setEmailError('Please enter valid Email');
           }
         } else {
+          setLoading(false);
           setLastName(true);
           setLastNameError('Please enter valid Name');
         }
       } else {
+        setLoading(false);
         setFirstName(true);
         setFirstNameError('Please enter valid Name');
       }
     } else {
+      setLoading(false);
       setTotalRequired('Please enter your Details');
     }
   };
