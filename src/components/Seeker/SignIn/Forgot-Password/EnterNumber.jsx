@@ -57,7 +57,7 @@ export default function FPEnterNumber() {
         if (data.phoneNumber.length === 10) {
           setPhoneNumber(false);
           setPhoneNumberError('');
-          axios.post('/enter_number', data).then(async (response) => {
+          axios.post('/api/enter_number', data).then(async (response) => {
             if (response.data.status === 'failed') {
               swal('sorry', response.data.message, 'error');
             } else {

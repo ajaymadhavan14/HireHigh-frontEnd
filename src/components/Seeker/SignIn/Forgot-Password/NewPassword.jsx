@@ -47,7 +47,7 @@ export default function SeekerSetNewPassword() {
           setConfPassword(false);
           setPasswordError('');
           setConfPasswordError('');
-          axios.post('/new_password', data).then((response) => {
+          axios.post('/api/new_password', data).then((response) => {
             if (response.data.status === 'failed') {
               swal('sorry', response.data.message, 'error');
             } else {
