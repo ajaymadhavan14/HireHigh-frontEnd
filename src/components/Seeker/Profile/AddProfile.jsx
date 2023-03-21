@@ -91,53 +91,68 @@ export default function SeekerAddprofile() {
         if (regName.test(data.position)) {
           setPosition(false);
           setPositionError('');
-
-          if (data.image.name) {
-            const allowedFormats = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-            if (!allowedFormats.exec(data.image.name)) {
-              toast.error('Invalid file type!', {
-                position: 'top-right',
-                autoClose: 4000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'colored',
-              });
+          if (regName.test(data.location)) {
+            setLocation(false);
+            setLocationError('');
+            if (regName.test(data.discription)) {
+              setDiscription(false);
+              setDiscriptionError('');
+              if (data.image.name) {
+                const allowedFormats = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                if (!allowedFormats.exec(data.image.name)) {
+                  toast.error('Invalid file type!', {
+                    position: 'top-right',
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'colored',
+                  });
+                } else {
+                  const dirs = Date.now();
+                  const rand = Math.random();
+                  const { image } = data;
+                  const imageRef = ref(storage, `/seekerImages/${dirs}${rand}_${image?.name}`);
+                  const toBase64 = (image) => new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(image);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = (error) => reject(error);
+                  }).catch((err) => {
+                    navigate('/error-page');
+                  });
+                  const imgBase = await toBase64(image);
+                  await uploadString(imageRef, imgBase, 'data_url').then(async () => {
+                    const downloadURL = await getDownloadURL(imageRef);
+                    data.image = downloadURL;
+                  });
+                }
+              } else {
+                data.image = '';
+              }
+              if (token) {
+                axios.post('/api/add_profile', data, { headers: { 'user-access-token': token } }).then((response) => {
+                  if (response.data.status === 'success') {
+                    navigate('/home');
+                  } else {
+                    swal('OOPS', response.data.message, 'error');
+                  }
+                });
+              } else {
+                swal('Please Login');
+                navigate('/login');
+              }
             } else {
-              const dirs = Date.now();
-              const rand = Math.random();
-              const { image } = data;
-              const imageRef = ref(storage, `/seekerImages/${dirs}${rand}_${image?.name}`);
-              const toBase64 = (image) => new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(image);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = (error) => reject(error);
-              }).catch((err) => {
-                navigate('/error-page');
-              });
-              const imgBase = await toBase64(image);
-              await uploadString(imageRef, imgBase, 'data_url').then(async () => {
-                const downloadURL = await getDownloadURL(imageRef);
-                data.image = downloadURL;
-              });
+              setLoading(false);
+              setDiscription(true);
+              setDiscriptionError('Please enter valid Name');
             }
           } else {
-            data.image = '';
-          }
-          if (token) {
-            axios.post('/api/add_profile', data, { headers: { 'user-access-token': token } }).then((response) => {
-              if (response.data.status === 'success') {
-                navigate('/home');
-              } else {
-                swal('OOPS', response.data.message, 'error');
-              }
-            });
-          } else {
-            swal('Please Login');
-            navigate('/login');
+            setLoading(false);
+            setLocation(true);
+            setLocationError('Please enter valid Name');
           }
         } else {
           setLoading(false);
