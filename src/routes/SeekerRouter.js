@@ -20,9 +20,7 @@ import Notification from '../pages/seeker/Notification';
 function SeekerRouter() {
   return (
     <div>
-
       <Routes>
-
         <Route path="/" element={<LandingPage />} />
 
         <Route path="/login" element={<SeLogin />} />
@@ -54,9 +52,7 @@ function SeekerRouter() {
         <Route path="/messages" element={<Messages />} />
 
         <Route path="/notification" element={<Notification />} />
-
       </Routes>
-
     </div>
   );
 }

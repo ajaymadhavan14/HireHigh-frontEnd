@@ -20,9 +20,7 @@ import Notification from '../pages/recruiter/Notification';
 function RecruiterRouter() {
   return (
     <div>
-
       <Routes>
-
         <Route path="/login" element={<ReLogin />} />
 
         <Route path="/signup" element={<ReSingup />} />
@@ -54,9 +52,7 @@ function RecruiterRouter() {
         <Route path="/messages" element={<Messages />} />
 
         <Route path="/notification" element={<Notification />} />
-
       </Routes>
-
     </div>
   );
 }

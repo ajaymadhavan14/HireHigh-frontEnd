@@ -10,9 +10,7 @@ import Companys from '../pages/admin/Companys';
 
 function AdminRouter() {
   return (
-
     <Routes>
-
       <Route path="/login" element={<AdLogin />} />
 
       <Route path="/home" element={<AdDashboard />} />
@@ -26,9 +24,7 @@ function AdminRouter() {
       <Route path="/category" element={<Category />} />
 
       <Route path="/company" element={<Companys />} />
-
     </Routes>
-
   );
 }
 

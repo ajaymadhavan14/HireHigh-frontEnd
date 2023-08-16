@@ -30,25 +30,26 @@ function App() {
 
   return (
     <Provider store={store}>
-      <AppContext.Provider value={{
-        userDetails,
-        setUserDetails,
-        recruiterDetails,
-        setRecruiterDetails,
-        userOtpConf,
-        setUserOtpConf,
-        recruiterOtpConf,
-        setRecruiterOtpConf,
-        companyDetails,
-        setCompanyDetails,
-        companyOtpConf,
-        setCompanyOtpConf,
-        socket,
-        sendNotification,
-        setSendNotification,
-        recieveNotification,
-        setRecieveNotification,
-      }}
+      <AppContext.Provider
+        value={{
+          userDetails,
+          setUserDetails,
+          recruiterDetails,
+          setRecruiterDetails,
+          userOtpConf,
+          setUserOtpConf,
+          recruiterOtpConf,
+          setRecruiterOtpConf,
+          companyDetails,
+          setCompanyDetails,
+          companyOtpConf,
+          setCompanyOtpConf,
+          socket,
+          sendNotification,
+          setSendNotification,
+          recieveNotification,
+          setRecieveNotification,
+        }}
       >
         <BrowserRouter>
           <Routes>
@@ -57,10 +58,8 @@ function App() {
             <Route path="/recruiter/*" element={<RecruiterRouter />} />
             <Route path="/company/*" element={<CompanyRouter />} />
             <Route path="/error-page" element={<ErrorPage />} />
-
           </Routes>
         </BrowserRouter>
-
       </AppContext.Provider>
     </Provider>
   );

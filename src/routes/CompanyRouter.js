@@ -19,7 +19,6 @@ function CompanyRouter() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/jobs" element={<JobList />} />
         <Route path="/notification" element={<Notification />} />
-
       </Routes>
     </div>
   );
